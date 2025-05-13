@@ -4,8 +4,8 @@ This repository contains two implementations of a dynamic "Random Ticker Grid" a
 
 ## Project Structure
 
-- `/react` — React implementation of the Random Ticker Grid
-- `/solid` — SolidJS implementation of the Random Ticker Grid
+- [`/react`](./react) — React implementation of the Random Ticker Grid
+- [`/solid`](./solid) — SolidJS implementation of the Random Ticker Grid
 
 ## About the Projects
 
@@ -29,8 +29,3 @@ Both apps render a grid of boxes, each showing a random number between 0 and 100
 
 - **React Only:**  
   The React version also supports a `withRef` query parameter to switch between state-based and ref-based updates.
-
-## Folders
-
-- [`/react`](./react) — React app and README
-- [`/solid`](./solid) — SolidJS app and README

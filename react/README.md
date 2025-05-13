@@ -31,7 +31,7 @@ http://localhost:3001/?n=5000&i=1000
 
 - Combine options:
 
-http://localhost:3001/?n=n=5000&withRef=true&i=100
+http://localhost:3001/?n=5000&withRef=true&i=100
 
 ## How It Works
 

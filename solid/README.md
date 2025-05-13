@@ -15,11 +15,11 @@ This SolidJS app displays a grid of animated "ticker" boxes, each showing a rand
 
 - Show 5000 tickers (from 0 to 10):
 
-http://localhost:3000/?n=5000
+http://localhost:3002/?n=5000
 
 - Show 5000 tickers, all updating every 100 milleseconds:
 
-http://localhost:3000/?n=5000&i=100
+http://localhost:3002/?n=5000&i=100
 
 ## How It Works
 

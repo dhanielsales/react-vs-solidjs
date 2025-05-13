@@ -19,19 +19,19 @@ This React app displays a grid of animated "ticker" boxes, each showing a random
 
 - Show 5000 tickers (from 0 to 10), using React state (default):
 
-http://localhost:\<PORT>/?n=5000
+http://localhost:3001/?n=5000
 
 - Show 5000 tickers, using the ref-based update method:
 
-http://localhost:\<PORT>/?n=5000&withRef=true
+http://localhost:3001/?n=5000&withRef=true
 
 - Show 5000 tickers, all updating every 1 second:
 
-http://localhost:\<PORT>/?n=5000&i=1000
+http://localhost:3001/?n=5000&i=1000
 
 - Combine options:
 
-http://localhost:\<PORT>/?n=n=5000&withRef=true&i=100
+http://localhost:3001/?n=n=5000&withRef=true&i=100
 
 ## How It Works
 

@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 
 function App() {
-  const numOfItems = Number(getParam("n") ?? "0");
+  const numOfItems = useRef(Number(getParam("n") ?? "0"));
+  const withRef = useRef((getParam("withRef") ?? "false") === "true");
 
   return (
     <div
@@ -11,9 +12,17 @@ function App() {
         flexWrap: "wrap",
       }}
     >
-      {Array.from({ length: numOfItems + 1 }, (_, i) => i).map((i) => (
-        <RandomTicker key={i} />
-      ))}
+      {withRef.current
+        ? Array.from({ length: numOfItems.current + 1 }, (_, i) => i).map(
+            (i) => <RandomTickerWithRef key={i} />
+          )
+        : null}
+
+      {!withRef.current
+        ? Array.from({ length: numOfItems.current + 1 }, (_, i) => i).map(
+            (i) => <RandomTicker key={i} />
+          )
+        : null}
     </div>
   );
 }
@@ -32,15 +41,13 @@ function getColor(num: number): string {
 
 function RandomTicker() {
   const [number, setNumber] = useState<number>(0);
-  const i = Number(getParam("i") ?? "0");
+  const i = useRef(Number(getParam("i") ?? "0"));
   const timerRef = useRef<number>(null);
-
-  console.log(i);
 
   useEffect(() => {
     function tick() {
       setNumber(Math.floor(Math.random() * 101));
-      const nextDelay = i || 500 + Math.random() * 500;
+      const nextDelay = i.current || 500 + Math.random() * 500;
       timerRef.current = window.setTimeout(tick, nextDelay);
     }
     tick();
@@ -68,6 +75,46 @@ function RandomTicker() {
     >
       {number}
     </div>
+  );
+}
+
+function RandomTickerWithRef() {
+  const i = useRef(Number(getParam("i") ?? "0"));
+  const timerRef = useRef<number>(null);
+  const boxRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function tick() {
+      const number = Math.floor(Math.random() * 101);
+      const color = getColor(number);
+      boxRef.current!.style.background = color;
+      boxRef.current!.textContent = number.toString();
+      const nextDelay = i.current || 500 + Math.random() * 500;
+      timerRef.current = window.setTimeout(tick, nextDelay);
+    }
+    tick();
+    return () => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+      }
+    };
+  }, []);
+
+  return (
+    <div
+      ref={boxRef}
+      style={{
+        color: "white",
+        padding: "2rem",
+        textAlign: "center",
+        width: "20px",
+        height: "20px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        fontSize: "2rem",
+      }}
+    ></div>
   );
 }
 

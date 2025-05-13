@@ -63,7 +63,7 @@ function App() {
         "flex-wrap": "wrap",
       }}
     >
-      <For each={items}>{(i) => <RandomTicker />}</For>
+      <For each={items}>{(_) => <RandomTicker />}</For>
     </div>
   );
 }

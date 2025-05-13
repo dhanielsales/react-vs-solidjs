@@ -1,54 +1,47 @@
-# React + TypeScript + Vite
+# Random Ticker Grid (React)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This React app displays a grid of animated "ticker" boxes, each showing a random number that updates at random intervals. The number of tickers, the update method, and the update interval can be controlled via query parameters.
 
-Currently, two official plugins are available:
+## Query Parameters
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **n**: _(required)_  
+  The number of ticker boxes to display. The grid will show boxes numbered from 0 to `n` (inclusive), so the total number of boxes is `n + 1`.
 
-## Expanding the ESLint configuration
+- **withRef**: _(optional, default: false)_  
+  If set to `true`, the app uses a version of the ticker that updates the DOM directly via a ref, instead of using React state.  
+  Example: `withRef=true`
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **i**: _(optional)_  
+  If provided, sets a fixed interval (in milliseconds) for all tickers to update. If not provided, each ticker updates at a random interval between 500ms and 1000ms.  
+  Example: `i=2000` (all tickers update every 2 seconds)
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## Examples
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- Show 5000 tickers (from 0 to 10), using React state (default):
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+http://localhost:\<PORT>/?n=5000
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+- Show 5000 tickers, using the ref-based update method:
+
+http://localhost:\<PORT>/?n=5000&withRef=true
+
+- Show 5000 tickers, all updating every 1 second:
+
+http://localhost:\<PORT>/?n=5000&i=1000
+
+- Combine options:
+
+http://localhost:\<PORT>/?n=n=5000&withRef=true&i=100
+
+## How It Works
+
+- Each ticker box displays a random number between 0 and 100.
+- The number updates at a random interval between 500ms and 1000ms, unless a fixed interval is set with the `i` parameter.
+- The background color of each box changes based on the current number:
+- **0–25**: Blue
+- **26–50**: Green
+- **51–75**: Orange
+- **76–100**: Red
+- The `withRef` parameter switches between two implementations:
+- **Default**: Uses React state for updates.
+- **withRef=true**: Uses a ref to update the DOM directly, bypassing React state.

@@ -1,28 +1,32 @@
-## Usage
+# Random Ticker Grid (SolidJS)
 
-```bash
-$ npm install # or pnpm install or yarn install
-```
+This SolidJS app displays a grid of animated "ticker" boxes, each showing a random number that updates at random intervals. The number of tickers and the update interval can be controlled via query parameters.
 
-### Learn more on the [Solid Website](https://solidjs.com) and come chat with us on our [Discord](https://discord.com/invite/solidjs)
+## Query Parameters
 
-## Available Scripts
+- **n**: _(required)_  
+  The number of ticker boxes to display. The grid will show boxes numbered from 0 to `n` (inclusive), so the total number of boxes is `n + 1`.
 
-In the project directory, you can run:
+- **i**: _(optional)_  
+  If provided, sets a fixed interval (in milliseconds) for all tickers to update. If not provided, each ticker updates at a random interval between 500ms and 1000ms.  
+  Example: `i=2000` (all tickers update every 2 seconds)
 
-### `npm run dev`
+## Examples
 
-Runs the app in the development mode.<br>
-Open [http://localhost:5173](http://localhost:5173) to view it in the browser.
+- Show 5000 tickers (from 0 to 10):
 
-### `npm run build`
+http://localhost:3000/?n=5000
 
-Builds the app for production to the `dist` folder.<br>
-It correctly bundles Solid in production mode and optimizes the build for the best performance.
+- Show 5000 tickers, all updating every 100 milleseconds:
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+http://localhost:3000/?n=5000&i=100
 
-## Deployment
+## How It Works
 
-Learn more about deploying your application with the [documentations](https://vite.dev/guide/static-deploy.html)
+- Each ticker box displays a random number between 0 and 100.
+- The number updates at a random interval between 500ms and 1000ms, unless a fixed interval is set with the `i` parameter.
+- The background color of each box changes based on the current number:
+- **0–25**: Blue
+- **26–50**: Green
+- **51–75**: Orange
+- **76–100**: Red

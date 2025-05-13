@@ -14,11 +14,12 @@ function getColor(num: number): string {
 
 function RandomTicker() {
   const [number, setNumber] = createSignal<number>(0);
+  const i = Number(getParam("i") ?? "0");
   let timer: number | undefined;
 
   function tick() {
     setNumber(Math.floor(Math.random() * 101));
-    const nextDelay = 500 + Math.random() * 500;
+    const nextDelay = i || 500 + Math.random() * 500;
     timer = window.setTimeout(tick, nextDelay);
   }
 
